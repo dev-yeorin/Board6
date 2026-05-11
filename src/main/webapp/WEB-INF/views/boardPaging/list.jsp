@@ -45,6 +45,19 @@
       margin-bottom : 150px; 
    }
    
+   #paging > table {
+   		width : 60%;
+   		margin : 0 auto;
+   		td {
+   		background-color: white;
+   		color: white;
+   		a{
+	   		display: block;
+   			text-decoration : none;
+   		}
+   		}
+   }
+   
    /* .menu td > .${ menu_id } { background-color : #04AA6D; } */  
 </style>
 
@@ -69,7 +82,8 @@
 
 	    <tr>
 	      <td  colspan="5">
-	       [<a href="/Board/WriteForm?menu_id=${ menu_id }">새 글 등록</a>]&nbsp;&nbsp;&nbsp; 
+	       [<a href="/BoardPaging/WriteForm?menu_id=${ menu_id }&nowpage=${nowpage}">
+	       새 글 등록</a>]&nbsp;&nbsp;&nbsp; 
 	       [<a href="/">Home</a>] 
 	      </td>
 	    </tr>
@@ -88,6 +102,9 @@
 	    </tr>
 	    </c:forEach>
 	  </table>	
+	  
+	  <%@include file="/WEB-INF/include/paging.jsp" %>
+	  
 	</main>
 </body>
 </html>

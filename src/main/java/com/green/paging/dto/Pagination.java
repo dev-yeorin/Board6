@@ -53,7 +53,15 @@ public class Pagination {
 		startPage     =  ((pageNo - 1) / pageSize ) * pageSize + 1;
 		endPage       =  startPage 	+ pageSize - 1; 
 		
+		// limitStart: 데이터베이스 가져올 시작 위치
+		limitStart = srchDto.getOffset(); 
+		// == limitStart   = (pageNo - 1) * numOfRows;
 		
+		// 이전 페이지로 이동 버튼 필요
+		existPrevPage = startPage > 1;
+		
+		// 이전 페이지로 이동 버튼 필요
+		existNextPage = endPage > 10;
 	}
 	
 }
