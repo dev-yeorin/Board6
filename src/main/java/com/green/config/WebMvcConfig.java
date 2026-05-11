@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.green.interceptor.AuthInterceptor;
 
 
-@Configuration
+//@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Autowired
@@ -26,7 +26,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		// .addPathPatterns("/**")
 		.addPathPatterns("/Board/**")  
 		.excludePathPatterns("/css/**", "/img/**", "/js/**");
-		WebMvcConfigurer.super.addInterceptors(registry);
+	
+		// paging 에서는 기능 중지 - 주석으로
+		//WebMvcConfigurer.super.addInterceptors(registry);
 	}
 	
 }
