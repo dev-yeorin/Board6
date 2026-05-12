@@ -32,8 +32,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 		//System.out.println(  "1.preHandle" );
 		
 		// 요청 주소
-		String  requestURI  = request.getRequestURI();
-		System.out.println("요청 주소:" + requestURI);
+		String  requestURI  = request.getRequestURI();   // /Board/list, /BoardPaging/List 
+		String  qryStr  	= request.getQueryString();  // menu_id=MENU01, menu_id=MENU01&nowpage=1
+		String  loc			= requestURI + "?" + qryStr; // /Board/list?menu_id=MENU01&nowpage=1
+		System.out.println("요청 주소:" + loc);
+
 		
 		// /Users/LoginForm", "/Users/Login" 제외
 		if( requestURI.contains("/Users/LoginForm" )  ) {
