@@ -7,12 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.green.interceptor.AuthInterceptor;
 
-
-//@Configuration
+@Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-
+	
 	@Autowired
-	private AuthInterceptor authInterceptor;
+	private AuthInterceptor  authInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -21,14 +20,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		// 제외 "/css/**", "/img/**", "/js/**" 경로는 interceptor의 대상아님
 		// .addPathPatterns("/Board/**")  
 		//  -> http://localhost:9090/Board 밑의 모든 파일
-		//  로그인 대상 페이지 설정 "/**" : ** 는 하위 폴더 포함
-	registry.addInterceptor(authInterceptor)
-		// .addPathPatterns("/**")
-		.addPathPatterns("/Board/**")  
-		.excludePathPatterns("/css/**", "/img/**", "/js/**");
-	
-		// paging 에서는 기능 중지 - 주석으로
-		//WebMvcConfigurer.super.addInterceptors(registry);
+		//  로그인 대상 페이지를 설정 "/**"  : ** 는 하위폴더포함
+		registry.addInterceptor( authInterceptor )
+		   // .addPathPatterns("/**")
+		    .addPathPatterns("/Board/**")
+		   // .addPathPatterns("/Board/**", "/BoardPaging/**")
+		    .excludePathPatterns("/css/**", "/img/**", "/js/**");
+				
+		WebMvcConfigurer.super.addInterceptors(registry);
 	}
 	
 }
+
+
+
+
+
+
+

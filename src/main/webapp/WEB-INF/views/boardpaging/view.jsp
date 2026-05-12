@@ -5,12 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link rel="shortcut icon" href="/img/favicon2.png" type="image/x-icon">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/css/common.css" rel="stylesheet" />
 
 <style>
-    table { width:100%; }
+  table { width:100%; }
   td {
      padding:5px 10px;
      text-align : center;
@@ -76,65 +79,56 @@
       }
   }
   
-  textarea {
-     width:100%;
-     height : 400px;     
-  }
   
-  input[name="title"]
-  ,textarea {
-     padding:5px;
-  }
 </style>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
 <body> 
   <main>
-    <%@include file="/WEB-INF/include/menus.jsp" %>  
-  
-    <h2>${ menu_name } 게시글 수정</h2>
-    <form  action="/Board/Update?idx=${ board.idx }" method="post">
-     <input type="hidden" name="menu_id" value="${ menu_id }" />
+    <!-- 메뉴 출력 -->
+    <%@include file="/WEB-INF/include/menuspaging.jsp" %>
+    
+    <h2>게시글 내용 보기</h2>
      <table id="table1">
       <tr>
-        <td>글번호</td>
-        <td>${ board.idx }</td>
+        <td>글 번호</td>
+        <td>${board.idx}</td>
         <td>조회수</td>
-        <td>${ board.hit }</td>        
+        <td>${board.hit}</td>      
       </tr>
       <tr>
         <td>작성자</td>
-        <td>${ board.writer }</td>
+        <td>${board.writer}</td>
         <td>작성일</td>
-        <td>${ board.regdate }</td>        
+        <td>${board.regdate}</td>      
       </tr>
-      <tr>        
-        <td><span class="red">*</span>제목</td>
-        <td colspan="3">
-          <input type="text"     name="title"  value="${ board.title }"  />
-        </td>
-      </tr>     
+      <tr>
+        <td>제목</td>
+        <td colspan="3">${ board.title }</td>
+      </tr>
       <tr>
         <td>내용</td>
-        <td  colspan="3"><textarea name="content">${ board.content }</textarea></td>        
-      </tr>   
+        <td colspan="3">${ board.content }</td>
+      </tr>
+     
       <tr>
         <td colspan="4">
-          <input type="submit"  value="수정" />
-          <input type="button"  value="목록" 
-            onclick="location.href='/Board/List?menu_id=${menu_id}'"
-          />        
+          <a href="/BoardPaging/WriteForm?menu_id=${board.menu_id}&nowpage=${nowpage}" 
+          		class="btn btn-primary">새글쓰기</a>
+          
+          <c:if test="${ sessionScope.login.userid eq board.writer }">
+          <a href="/BoardPaging/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-warning">수정</a>
+          <a href="/BoardPaging/Delete?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-danger">삭제</a>
+          </c:if>
+          
+          <a href="/BoardPaging/List?menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-info">목록</a>
+          <a href="/" class="btn btn-success">Home</a>
         </td>
       </tr>
      </table>    
-    </form>
   
   </main>
-  
-  <!-- Javascript 코딩 : client validation -->
-  <script>
-  
-  </script>
-  
-  
   
   
 </body>

@@ -35,7 +35,6 @@ SQL>
 
 ---------------------------------------
 -- 메뉴 목록
-drop table menus;
 CREATE TABLE  MENUS (
     MENU_ID     VARCHAR2(6)    PRIMARY KEY
   , MENU_NAME   VARCHAR2(100)
@@ -43,65 +42,52 @@ CREATE TABLE  MENUS (
 );
 
 INSERT INTO  MENUS VALUES ('MENU01','JAVA', 1);
-INSERT INTO  MENUS VALUES ('MENU02','SPRING', 2);
-INSERT INTO  MENUS VALUES ('MENU03','ORACLE', 3);
 COMMIT;
 
-select * from menus;
-
-
-
-----------------------------------------------------------
+---------------------------------------------------
 -- 회원 정보
-CREATE TABLE TUSER (
-      USERID   VARCHAR2(12)   PRIMARY KEY
-    , PASSWD   VARCHAR2(12)   NOT NULL
-    , USERNAME VARCHAR2(100)  NOT NULL
-    , EMAIL    VARCHAR2(320)
-    , UPOINT   NUMBER(9)      DEFAULT 0
-    , REGDATE  DATE           DEFAULT  SYSDATE
-
+CREATE TABLE   TUSER (
+      USERID     VARCHAR2(12)   PRIMARY  KEY
+    , PASSWD     VARCHAR2(12)   NOT  NULL
+    , USERNAME   VARCHAR2(100)  NOT  NULL
+    , EMAIL      VARCHAR2(320)
+    , UPOINT     NUMBER(9)      DEFAULT   0
+    , REGDATE    DATE           DEFAULT   SYSDATE
 );
 
+INSERT INTO  TUSER VALUES (
+	 'admin','1234', '관리자', 'admin@green.com', 1000, sysdate);
+INSERT INTO  TUSER VALUES (
+	 'sky1','1234', '고객1', 'sky1@green.com', 1000, sysdate);	 
+COMMIT;
 
--------------------------------------------------------
-- 멀티 게시판 생성
+--------------------------------------------
+-- 멀티 게시판 정보
 
-
-CREATE TABLE BOARD (
-    IDX         NUMBER(8, 0)        PRIMARY KEY,
-    MENU_ID     VARCHAR2(6)
-        REFERENCES MENUS ( MENU_ID)             ,
-    TITLE       VARCHAR2(300)       NOT NULL    ,
-    CONTENT    VARCHAR2(4000)                   ,
-    WRITER      VARCHAR2(12)                    ,
-    REGDATE     DATE                DEFAULT SYSDATE,
-    HIT         NUMBER(9, 0)        DEFAULT 0
-    
-
+CREATE  TABLE   BOARD (
+     IDX         NUMBER(8, 0)    PRIMARY KEY
+   , MENU_ID     VARCHAR2(6)
+      REFERENCES   MENUS ( MENU_ID )
+   , TITLE       VARCHAR2(300)   NOT  NULL
+   , CONTENT     VARCHAR2(4000) 
+   , WRITER      VARCHAR2(12)
+   , REGDATE     DATE            DEFAULT  SYSDATE
+   , HIT         NUMBER(9, 0)    DEFAULT  0
 );
 
-
-INSERT INTO board(
+INSERT INTO board (
     idx,
     menu_id,
     title,
     content,
-    writer,
-    regdate,
-    hit
-) VALUES (
-    (SELECT NVL(MAX(idx), 0)+1 FROM BOARD),
-    'MENU01',
-    'JAVA Hello',
-    '자바 게시판에 오신 것을 환영합니다',
-    'java',
-    sysdate,
-    0
-   
-    
+    writer
+) VALUES (  
+    (SELECT NVL(MAX(IDX),0)+1 FROM BOARD),
+    'MENU02',
+    'JSP Hello',
+    'JSP 게시판에 오신것을 환영합니다',
+    'jsp' 
 );
-
 commit;
 
 SELECT
@@ -109,35 +95,14 @@ SELECT
     menu_id,
     title,
     writer,
-    TO_CHAR(regdate, 'YYYY-MM-DD') REGDATE,
+    TO_CHAR(regdate,'YYYY-MM-DD') REGDATE,
     hit
 FROM
     board
-WHERE MENU_ID = 'MENU01'
+WHERE
+    MENU_ID = 'MENU01'
 ORDER BY
     IDX DESC;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

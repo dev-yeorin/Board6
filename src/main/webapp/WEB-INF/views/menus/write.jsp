@@ -1,4 +1,3 @@
-<%-- D:\dev\springboot\Board2\src\main\webapp\WEB-INF\views\menus\write.jsp --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,10 +15,10 @@
      padding:5px 10px;
      text-align : center;
      &:nth-of-type(1) {
-        background: black;
-        color : white;
-        border:1px solid white;
-    } 
+	     background: black;
+	     color : white;
+	     border:1px solid white;
+	 } 
   }
   tr:last-child > td {
       background: white;
@@ -63,11 +62,20 @@
     </form>
   
   </main>
-	<script>
-	const fromEl = document.quertySelector();
-	formEl.addEventListener('Click', function(e) {
-		
-	});
-	</script>
 </body>
 </html>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

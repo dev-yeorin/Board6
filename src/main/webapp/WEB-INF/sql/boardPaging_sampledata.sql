@@ -1,3 +1,4 @@
+-- menu_id 별로 sample data 200 건씩 생성해준다 
 INSERT INTO BOARD (
       IDX
     , MENU_ID
@@ -37,6 +38,7 @@ FROM DATA D
 CROSS JOIN BASE B;
 
 commit;
+
 ----
 페이징 성능을 위한 인덱스 추천
 

@@ -45,20 +45,25 @@
       margin-bottom : 150px; 
    }
    
-   #paging > table {
-   		width : 60%;
-   		margin : 0 auto;
-   		td {
-   		background-color: white;
-   		color: white;
-   		a{
-	   		display: block;
-   			text-decoration : none;
-   		}
-   		}
+   #paging > table  {
+      width : 60%;
+      margin : 0 auto;
+      td {
+         border:1px solid red;
+         background-color:white;
+         color: white;
+         a {
+            display:block;
+         	text-decoration: none;
+         }         
+      }
+   
    }
    
-   /* .menu td > .${ menu_id } { background-color : #04AA6D; } */  
+   #search {      
+      width      : 30%;       
+      margin     : 10px auto;
+   }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -82,8 +87,9 @@
 
 	    <tr>
 	      <td  colspan="5">
-	       [<a href="/BoardPaging/WriteForm?menu_id=${ menu_id }&nowpage=${nowpage}">
-	       새 글 등록</a>]&nbsp;&nbsp;&nbsp; 
+	       [<a href="/BoardPaging/WriteForm?menu_id=${menu_id}&nowpage=${nowpage}">
+	       새 글 등록
+	       </a>]&nbsp;&nbsp;&nbsp; 
 	       [<a href="/">Home</a>] 
 	      </td>
 	    </tr>
@@ -92,7 +98,7 @@
 	    <tr>
 	      <td> ${  board.idx      }  </td>    <!-- menu.getMenu_id() -->
 	      <td class="title"> 
-	        <a href ="/Board/View?idx=${board.idx}&menu_id=${menu_id}">
+	        <a href ="/BoardPaging/View?idx=${board.idx}&menu_id=${menu_id}&nowpage=${nowpage}">
 	        ${ board.title    }
 	        </a>  
 	      </td>
@@ -103,8 +109,32 @@
 	    </c:forEach>
 	  </table>	
 	  
-	  <%@include file="/WEB-INF/include/paging.jsp" %>
+	  
+	  <form action="/BoardPaging/List" method="get">
+	  <input type="hidden" name="menu_id" value="${ menu_id }" />	  
+	  <input type="hidden" name="nowpage" value="${ nowpage }" />	  
+	  <div id="search">
+	    <select name="searchType">
+	      <option value="title">제목</option> 
+	      <option value="content">내용</option> 
+	      <option value="writer">작성자</option> 
+	    </select>
+	    <input type="text" name="keyword" />
+	    <input type="submit" value="검색" />	    
+	  </div>
+	  </form>
+	  
+	  <%@include file="/WEB-INF/include/paging.jsp" %> 
 	  
 	</main>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,3 @@
-<%-- D:\dev\springboot\Board2\src\main\webapp\WEB-INF\views\menus\write.jsp --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,10 +15,10 @@
      padding:5px 10px;
      text-align : center;
      &:nth-of-type(1) {
-        background: black;
-        color : white;
-        border:1px solid white;
-    } 
+	     background: black;
+	     color : white;
+	     border:1px solid white;
+	 } 
   }
   tr:last-child > td {
       background: white;
@@ -35,27 +34,40 @@
   
 </style>
 <body> 
-     <main>
-     
-      <h2>메뉴 등록</h2>
-      <form action="/Menus/Write2" method="get">
-        <table>
-          <tr>
-            <td>메뉴 이름</td>
-            <td>
-              <input type="text" name="menu_name" />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-               <input type="submit" value="추가" />
-               <input type="button" value="목록" 
-                     onclick="location.href='/Menus/List'"
-               />
-            </td>
-          </tr>
-        </table>
-      </form>
-   </main>
+  <main>
+    <h2>메뉴 등록</h2>
+    <form  action="/Menus/Write2" method="get">
+     <table>      
+      <tr>
+        <td>메뉴 이름</td>
+        <td><input type="text" name="menu_name" /></td>        
+      </tr>      
+      <tr>
+        <td colspan="2">
+          <input type="submit"  value="추가" />
+          <input type="button"  value="목록" 
+            onclick="window.location.href='/Menus/List'"
+          />        
+        </td>
+      </tr>
+     </table>    
+    </form>
+  
+  </main>
 </body>
 </html>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

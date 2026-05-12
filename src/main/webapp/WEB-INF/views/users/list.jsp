@@ -38,8 +38,7 @@
 
 <body>
 	<main>
-	<%@include file="/WEB-INF/include/menus.jsp" %>
-	  <h2>게시물 목록</h2>
+	  <h2>회원 목록</h2>
 	  <table>
 	    <tr>
 	      <td>USERID</td>
@@ -72,3 +71,12 @@
 	</main>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

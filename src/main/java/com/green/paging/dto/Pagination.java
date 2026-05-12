@@ -8,10 +8,11 @@ import lombok.ToString;
 
 //  paging.jsp : 페이지 번호를 출력할 파일
 //         한줄에 10개의 페이지번호를 출력 srchDto  pageSize
-//       startPage           nowpage(pageNo)   endPage             
+//       startPage           nowpage(pageNo)         endPage             
 //         1          2   3  4   [5]    6   ...   9    10      >  >>   
 //  << <  11         12  13 14   15    15   ...  19    20      >  >>
 //  << <  21         22  23 24   25    26
+//                                   totalPageCount : 전체 페이지수   
 
 @Getter
 @ToString 
@@ -22,7 +23,7 @@ public class Pagination {
 	private   int       startPage;
 	private   int       endPage;
 	
-	private   int       limitStart; 
+	private   int       limitStart;    // Offset 값
 	
 	private   boolean   existPrevPage;
 	private   boolean   existNextPage;
@@ -52,16 +53,27 @@ public class Pagination {
 		int  pageSize =  srchDto.getPageSize(); // 한줄에 출력할 페이지 번호 수 
 		startPage     =  ((pageNo - 1) / pageSize ) * pageSize + 1;
 		endPage       =  startPage 	+ pageSize - 1; 
+				
+		// limitStart : 데이터베이스 가져올 시작위치 
+		limitStart    =  srchDto.getOffset(); 
+		// ==  limitStart    =  (pageNo - 1) * numOfRows;
 		
-		// limitStart: 데이터베이스 가져올 시작 위치
-		limitStart = srchDto.getOffset(); 
-		// == limitStart   = (pageNo - 1) * numOfRows;
+		// 이전페이지로 이동 버튼 필요
+		existPrevPage  =  startPage > 1;
 		
-		// 이전 페이지로 이동 버튼 필요
-		existPrevPage = startPage > 1;
+		// 다음페이지로 이동 버튼 필요
+		existNextPage  =  endPage  < totalPageCount;  
 		
-		// 이전 페이지로 이동 버튼 필요
-		existNextPage = endPage > 10;
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
