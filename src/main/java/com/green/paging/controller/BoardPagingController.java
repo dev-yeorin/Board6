@@ -189,11 +189,32 @@ public class BoardPagingController {
 		String		  menu_id  = boardDto.getMenu_id();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("boardpaging/update");
+		
 		mv.addObject("menuList", menuList);
-		mv.addObject("menu_id", menu_id);
+		
+		mv.addObject("menu_id",  menu_id );
+		mv.addObject("nowpage",  nowpage );
+		
+		mv.addObject("board",    board   );
 		return mv;
 	}
 	
+	@RequestMapping("/Update")
+	public ModelAndView update(BoardDto boardDto, int nowpage) {
+	
+		// 넘어온 값으로 db 정보 수정
+		boardPagingMapper.updateBoard(boardDto);
+		
+		// List 로 이동
+		String menu_id  = boardDto.getMenu_id();
+		ModelAndView mv = new ModelAndView();
+		String      loc = """
+				redirect:/BoardPaging/List?menu_id=%s&nowpage=%d
+				""".formatted(menu_id, nowpage);
+		mv.setViewName(loc);
+		
+		return mv;
+	}
 }
 
 
