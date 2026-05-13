@@ -41,7 +41,7 @@ public class UserController {
 
 		ModelAndView  mv  =  new ModelAndView();
 		mv.setViewName("users/write");
-		mv.addObject("msg", "태훈이");
+		mv.addObject("msg", "회원가입");
 		
 		return  mv;
 

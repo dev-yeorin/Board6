@@ -50,6 +50,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 		// 사용자 로그인정보를 세션 메모리에 user 저장
 		Object       login    = session.getAttribute("login");
 		System.out.println( login );
+		
+		session.setAttribute("loc", loc);
+		
 		if( login == null  )  {
 			// 로그인 되어 있지 않다. 로그인페이지로 이동
 			response.sendRedirect("/Users/LoginForm");
