@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.green.BoardApplication;
 import com.green.board.dto.BoardDto;
+import com.green.config.WebMvcConfig;
 import com.green.interceptor.AuthInterceptor;
 import com.green.menus.dto.MenuDTO;
 import com.green.menus.mapper.MenuMapper;
@@ -20,11 +21,18 @@ import com.green.paging.mapper.BoardPagingMapper;
 @RequestMapping("/BoardPaging")
 public class BoardPagingController {
 
+    private final WebMvcConfig webMvcConfig;
+
 	@Autowired
 	private  MenuMapper         menuMapper;
 	
 	@Autowired
 	private  BoardPagingMapper  boardPagingMapper;
+
+
+    BoardPagingController(WebMvcConfig webMvcConfig) {
+        this.webMvcConfig = webMvcConfig;
+    }
 
   
 	// /BoardPaging/List?menu_id=MENU01&nowpage=1
@@ -167,6 +175,24 @@ public class BoardPagingController {
 		
 	}
 	
+	// 게시글 수정
+	@RequestMapping("/UpdateForm")
+	public ModelAndView updateForm( BoardDto boardDto, int nowpage) {
+
+		// 메뉴 목록
+		List<MenuDTO> menuList = menuMapper.getMenuList();
+		
+		// 수정할 페이지에 출력할 자료를 idx로 조회
+		BoardDto		board  = boardPagingMapper.getBoard(boardDto);
+		
+		// 수정할 페이지로 이동
+		String		  menu_id  = boardDto.getMenu_id();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("boardpaging/update");
+		mv.addObject("menuList", menuList);
+		mv.addObject("menu_id", menu_id);
+		return mv;
+	}
 	
 }
 
