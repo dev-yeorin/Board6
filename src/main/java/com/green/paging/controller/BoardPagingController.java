@@ -203,9 +203,13 @@ public class BoardPagingController {
 	public ModelAndView update(BoardDto boardDto, int nowpage) {
 	
 		// 넘어온 값으로 db 정보 수정
-		boardPagingMapper.updateBoard(boardDto);
+		BoardDto board = boardPagingMapper.updateBoard(boardDto);
 		
 		// List 로 이동
+		String content = board.getContent();
+		if(content != null)
+			board.setContent( content.replace("\n", "<br>"));
+		
 		String menu_id  = boardDto.getMenu_id();
 		ModelAndView mv = new ModelAndView();
 		String      loc = """
