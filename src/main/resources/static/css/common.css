@@ -23,7 +23,7 @@
    
    .red     { color:red;  }
    
-   .menu    {
+   .menu, #paging   {
    	   td  {
    	       padding:0px;
 	   	   a   { 
@@ -43,8 +43,7 @@
    
    .h2 { margin :10px; text-align:center;  } 
    
-   
-   
+ 
    
    
    

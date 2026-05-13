@@ -89,7 +89,7 @@
     <!-- 메뉴 출력 -->
     <%@include file="/WEB-INF/include/menuspaging.jsp" %>
     
-    <h2>게시글 내용 보기</h2>
+    <h2 class="h2"><b id="mname"></b>게시글 내용 보기</h2>
      <table id="table1">
       <tr>
         <td>글 번호</td>
@@ -115,11 +115,13 @@
       <tr>
         <td colspan="4">
           <a href="/BoardPaging/WriteForm?menu_id=${board.menu_id}&nowpage=${nowpage}" 
-          		class="btn btn-primary">새글쓰기</a>
+              class="btn btn-primary">새글쓰기</a>
           
           <c:if test="${ sessionScope.login.userid eq board.writer }">
-          <a href="/BoardPaging/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-warning">수정</a>
-          <a href="/BoardPaging/Delete?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-danger">삭제</a>
+          <a href="/BoardPaging/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" 
+             class="btn btn-warning">수정</a>
+          <a href="/BoardPaging/Delete?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" 
+            class="btn btn-danger">삭제</a>
           </c:if>
           
           <a href="/BoardPaging/List?menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-info">목록</a>
@@ -130,7 +132,12 @@
   
   </main>
   
-  
+  <script>
+	  const  mnameEl    =  document.querySelector('#mname');
+	  let    menunameEl =  document.querySelector('.menu .active')
+	  mnameEl.innerHTML =  menunameEl.innerHTML;
+  </script>
+	
 </body>
 </html>    
 

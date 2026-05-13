@@ -13,13 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
-
-    private final UserController userController;
-
-    AuthInterceptor(UserController userController) {
-        this.userController = userController;
-    }
-	
+ 	
 	// Interceptor : 페이지가 이동될때 Controller 앞에서 가로채기하는 클래스
 	// 1.preHandle 전처리(로그인 체크)	
 	@Override
@@ -32,11 +26,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		//System.out.println(  "1.preHandle" );
 		
 		// 요청 주소
-		String  requestURI  = request.getRequestURI();   // /Board/list, /BoardPaging/List 
-		String  qryStr  	= request.getQueryString();  // menu_id=MENU01, menu_id=MENU01&nowpage=1
-		String  loc			= requestURI + "?" + qryStr; // /Board/list?menu_id=MENU01&nowpage=1
-		System.out.println("요청 주소:" + loc);
-
+		String  requestURI  = request.getRequestURI();    // /Board/List, /BoardPaging/List
+		String  qryStr      = request.getQueryString();   // menu_id=MENU01, menu_id=MENU01&nowpage=1 
+		String  loc         = requestURI + "?" + qryStr;  // /BoardPaging/List?menu_id=MENU01&nowpage=1
+		//System.out.println("요청 주소:" + loc);
 		
 		// /Users/LoginForm", "/Users/Login" 제외
 		if( requestURI.contains("/Users/LoginForm" )  ) {
@@ -49,10 +42,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		HttpSession  session  =  request.getSession();
 		// 사용자 로그인정보를 세션 메모리에 user 저장
 		Object       login    = session.getAttribute("login");
-		System.out.println( login );
+		//System.out.println(login);
 		
 		session.setAttribute("loc", loc);
-		
+
 		if( login == null  )  {
 			// 로그인 되어 있지 않다. 로그인페이지로 이동
 			response.sendRedirect("/Users/LoginForm");

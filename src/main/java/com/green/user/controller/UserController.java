@@ -41,7 +41,7 @@ public class UserController {
 
 		ModelAndView  mv  =  new ModelAndView();
 		mv.setViewName("users/write");
-		mv.addObject("msg", "회원가입");
+		mv.addObject("msg", "태훈이");
 		
 		return  mv;
 
@@ -189,16 +189,17 @@ public class UserController {
 		
 	// 로그인 /Users/Login , userid=, passwd=
 	@RequestMapping("/Login")
-	public  String   login( UserDto userDto, 
-			HttpServletRequest request ) {
+	public  String   login( 
+			UserDto             userDto, 
+			HttpServletRequest  request ) {
 		
-		UserDto      user     =  userMapper.getUser( userDto );
-		
-		HttpSession  session  =  request.getSession();
+		UserDto      user       =  userMapper.getLogin( userDto );
+				
+		HttpSession  session    =  request.getSession();
 		session.setAttribute("login", user);
 		
-		String		loc		  = session.getAttribute("loc") + "";
-		
+		String       loc        =  session.getAttribute("loc") + "";  
+	
 		return  "redirect:" + loc;
 		
 	}

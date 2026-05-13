@@ -21,7 +21,6 @@
   <div class="mb-3">
     <label for="passwd" class="form-label">암호</label>
     <input type="password" class="form-control" name="passwd" id="passwd" value="1234">
-    
   </div> 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

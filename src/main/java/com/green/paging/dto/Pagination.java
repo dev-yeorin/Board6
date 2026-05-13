@@ -10,7 +10,7 @@ import lombok.ToString;
 //         한줄에 10개의 페이지번호를 출력 srchDto  pageSize
 //       startPage           nowpage(pageNo)         endPage             
 //         1          2   3  4   [5]    6   ...   9    10      >  >>   
-//  << <  11         12  13 14   15    15   ...  19    20      >  >>
+//  << <  11         12  13 14   15    16   ...  19    20      >  >>
 //  << <  21         22  23 24   25    26
 //                                   totalPageCount : 전체 페이지수   
 
@@ -18,7 +18,7 @@ import lombok.ToString;
 @ToString 
 public class Pagination {
 	private   int       totalCount;      // 해당메뉴의 조회된 자료수
-	private   int       totalPageCount;  // 전체 페이지수 : totalCount / numOfRows
+	private   int       totalPageCount;  // 전체 페이지수 : totalCount / numOfRows 올림
 	
 	private   int       startPage;
 	private   int       endPage;

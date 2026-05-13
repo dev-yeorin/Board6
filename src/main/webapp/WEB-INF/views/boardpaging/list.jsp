@@ -49,6 +49,7 @@
       width : 60%;
       margin : 0 auto;
       td {
+      	
          border:1px solid red;
          background-color:white;
          color: white;
@@ -74,7 +75,7 @@
 	<main>
 	  <%@include file="/WEB-INF/include/menuspaging.jsp" %> 
 	
-	  <h2 class="h2">${ menu.menu_name } 게시물 목록</h2>
+	  <h2 class="h2"><b id="mname">${ menu.menu_name }</b> 게시물 목록</h2>
 	  <table id="list" class="table  table-hover">
  
 	    <tr>
@@ -114,8 +115,8 @@
 	  <input type="hidden" name="menu_id" value="${ menu_id }" />	  
 	  <input type="hidden" name="nowpage" value="${ nowpage }" />	  
 	  <div id="search">
-	    <select name="searchType">
-	      <option value="title">제목</option> 
+	    <select name="searchType">   
+	      <option value="title">제목</option>     <!-- searchType=title -->
 	      <option value="content">내용</option> 
 	      <option value="writer">작성자</option> 
 	    </select>
@@ -127,6 +128,15 @@
 	  <%@include file="/WEB-INF/include/paging.jsp" %> 
 	  
 	</main>
+	
+	<!-- javascript -->
+	<script>
+	
+	  const  mnameEl    =  document.querySelector('#mname');
+	  let    menunameEl =  document.querySelector('.menu .active')
+	  mnameEl.innerHTML =  menunameEl.innerHTML;
+	</script>
+	
 </body>
 </html>
 
